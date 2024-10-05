@@ -1,13 +1,12 @@
-import hello from "./hello";
-import world from "./world";
-import img from "./images/S__30220334.jpg";
+import number from "./number";
+import number2 from "./number2";
 
-import "./css/index.scss";
+number();
+number2();
 
-console.log(img);
-console.log(hello + world);
-
-// create a img and insert into body
-var oImg = document.createElement("img");
-oImg.src = img;
-document.body.appendChild(oImg);
+if (module.hot) {
+  module.hot.accept("./number2.js", function () {
+    document.body.removeChild(document.getElementById("number2"));
+    number2();
+  }); // 接受热更新
+}

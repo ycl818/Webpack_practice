@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
 module.exports = {
   mode: "development", // 會是沒有壓縮過的, production: 壓縮
@@ -38,5 +39,14 @@ module.exports = {
       template: "./src/index.html",
     }),
     new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"), // 使用 static 替代 contentBase
+    },
+    compress: true, // 启用 gzip 压缩
+    port: 9000, // 可以指定端口
+    hot: true,
+  },
 };
