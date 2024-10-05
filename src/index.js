@@ -1,12 +1,6 @@
-import number from "./number";
-import number2 from "./number2";
+//import "@babel/polyfill";
+const arr = [new Promise(() => {}), new Promise(() => {})];
 
-number();
-number2();
-
-if (module.hot) {
-  module.hot.accept("./number2.js", function () {
-    document.body.removeChild(document.getElementById("number2"));
-    number2();
-  }); // 接受热更新
-}
+arr.map((item) => {
+  console.log(item);
+});
