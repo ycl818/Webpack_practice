@@ -4,8 +4,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = {
-  mode: "development", // 會是沒有壓縮過的, production: 壓縮
+  mode: "production", // 會是沒有壓縮過的, production: 壓縮
   entry: "./src/index.js",
+  devtool: "cheap-module-source-map", // production環境中最佳選擇
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"), // __dirname = c:/Users/.... 絕對路徑
