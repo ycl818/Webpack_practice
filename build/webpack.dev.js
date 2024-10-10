@@ -8,6 +8,18 @@ const devConfig = {
   mode: "development", // 會是沒有壓縮過的, production: 壓縮
   devtool: "eval-cheap-module-source-map",
   plugins: [new webpack.HotModuleReplacementPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"], // loader執行順序是從後向前
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"], // loader執行順序是從後向前
+      },
+    ],
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, "dist"), // 使用 static 替代 contentBase

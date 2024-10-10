@@ -22,14 +22,6 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"], // loader執行順序是從後向前
-      },
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"], // loader執行順序是從後向前
-      },
-      {
         test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
