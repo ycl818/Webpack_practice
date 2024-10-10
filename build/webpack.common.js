@@ -1,15 +1,12 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const webpack = require("webpack");
 
 module.exports = {
-  mode: "production", // 會是沒有壓縮過的, production: 壓縮
   entry: "./src/index.js",
-  devtool: "cheap-module-source-map", // production環境中最佳選擇
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "dist"), // __dirname = c:/Users/.... 絕對路徑
+    path: path.resolve(__dirname, "./../dist"), // __dirname = c:/Users/.... 絕對路徑
   },
   module: {
     rules: [
@@ -69,14 +66,5 @@ module.exports = {
       template: "./src/index.html",
     }),
     new CleanWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
-  devServer: {
-    static: {
-      directory: path.join(__dirname, "dist"), // 使用 static 替代 contentBase
-    },
-    compress: true, // 启用 gzip 压缩
-    port: 9000, // 可以指定端口
-    hot: true,
-  },
 };
