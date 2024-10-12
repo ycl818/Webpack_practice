@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const HappyPack = require("happypack");
 
 const options = {
   extensions: [`js`, `jsx`],
@@ -14,9 +15,13 @@ module.exports = {
     path: path.resolve(__dirname, "./../dist"), // __dirname = c:/Users/.... 絕對路徑
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx"], // 可以省略的副檔名
+    alias: {
+      "@": path.resolve(__dirname, "../src"), // 別名
+    },
   },
   module: {
+    noParse: /node_modules\/(jquery\.js)/,
     rules: [
       {
         test: /\.jpg$/,
@@ -32,7 +37,10 @@ module.exports = {
       {
         test: /\.m?jsx?$/,
         exclude: /node_modules/,
+        include: path.resolve(__dirname, "../src"),
+        // use: "happypack/loader?id=js",
         use: ["babel-loader"],
+
         // loader: "babel-loader",
         // options: {
         //   presets: [
@@ -60,6 +68,10 @@ module.exports = {
     ],
   },
   plugins: [
+    // new HappyPack({
+    //   id: "js",
+    //   use: ["babel-loader"],
+    // }),
     // 會再打包結束後自動生成html文件，並把打包生成的文件自動引入到html中
     new HtmlWebpackPlugin({
       template: "./src/index.html",
