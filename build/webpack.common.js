@@ -22,32 +22,32 @@ module.exports = {
         },
       },
       {
-        test: /\.m?js$/,
+        test: /\.m?jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            // presets: [
-            //   [
-            //     "@babel/preset-env",
-            //     {
-            //       useBuiltIns: "usage",
-            //     },
-            //   ],
-            // ],
-            plugins: [
-              [
-                "@babel/plugin-transform-runtime", // 用這種打包方式 只要是不會汙染全域的變數
-                {
-                  absoluteRuntime: false,
-                  corejs: 3,
-                  helpers: true,
-                  regenerator: true,
-                  version: "7.0.0-beta.0",
-                },
-              ],
-            ],
-          },
+          // options: {
+          //   presets: [
+          //     [
+          //       "@babel/preset-env",
+          //       {
+          //         useBuiltIns: "usage",
+          //       },
+          //     ],
+          //   ],
+          // plugins: [
+          //   [
+          //     "@babel/plugin-transform-runtime", // 用這種打包方式 主要是不會汙染全域的變數
+          //     {
+          //       absoluteRuntime: false,
+          //       corejs: 3,
+          //       helpers: true,
+          //       regenerator: true,
+          //       version: "7.0.0-beta.0",
+          //     },
+          //   ],
+          // ],
+          // },
         },
       },
     ],
