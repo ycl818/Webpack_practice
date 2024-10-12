@@ -1,12 +1,20 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+
+const options = {
+  extensions: [`js`, `jsx`],
+};
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "./../dist"), // __dirname = c:/Users/.... 絕對路徑
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -24,31 +32,30 @@ module.exports = {
       {
         test: /\.m?jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          // options: {
-          //   presets: [
-          //     [
-          //       "@babel/preset-env",
-          //       {
-          //         useBuiltIns: "usage",
-          //       },
-          //     ],
-          //   ],
-          // plugins: [
-          //   [
-          //     "@babel/plugin-transform-runtime", // 用這種打包方式 主要是不會汙染全域的變數
-          //     {
-          //       absoluteRuntime: false,
-          //       corejs: 3,
-          //       helpers: true,
-          //       regenerator: true,
-          //       version: "7.0.0-beta.0",
-          //     },
-          //   ],
-          // ],
-          // },
-        },
+        use: ["babel-loader"],
+        // loader: "babel-loader",
+        // options: {
+        //   presets: [
+        //     [
+        //       "@babel/preset-env",
+        //       {
+        //         useBuiltIns: "usage",
+        //       },
+        //     ],
+        //   ],
+        // plugins: [
+        //   [
+        //     "@babel/plugin-transform-runtime", // 用這種打包方式 主要是不會汙染全域的變數
+        //     {
+        //       absoluteRuntime: false,
+        //       corejs: 3,
+        //       helpers: true,
+        //       regenerator: true,
+        //       version: "7.0.0-beta.0",
+        //     },
+        //   ],
+        // ],
+        // },
       },
     ],
   },
@@ -58,5 +65,6 @@ module.exports = {
       template: "./src/index.html",
     }),
     new CleanWebpackPlugin(),
+    new ESLintPlugin(options),
   ],
 };
